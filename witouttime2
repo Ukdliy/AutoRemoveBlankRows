@@ -1,0 +1,19 @@
+function deleteEmptyRows() {
+  var sheet = SpreadsheetApp.getActiveSheet();
+  var data = sheet.getDataRange().getValues();
+  var numRows = sheet.getLastRow();
+  var numCols = sheet.getLastColumn();
+  
+  for (var row = numRows; row >= 1; row--) {
+    var rowEmpty = true;
+    for (var col = 0; col < numCols; col++) {
+      if (data[row - 1][col] != "") {
+        rowEmpty = false;
+        break;
+      }
+    }
+    if (rowEmpty == true) {
+      sheet.deleteRow(row);
+    }
+  }
+}
