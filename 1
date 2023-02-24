@@ -1,0 +1,22 @@
+function removeEmptyRows() {
+  var sheet = SpreadsheetApp.getActiveSheet();
+  var rows = sheet.getDataRange();
+  var numRows = rows.getNumRows();
+  var values = rows.getValues();
+
+  var rowsDeleted = 0;
+  for (var i = 0; i <= numRows - 1; i++) {
+    var row = values[i];
+    var isEmpty = true;
+    for (var j = 0; j < row.length; j++) {
+      if (row[j] !== "") {
+        isEmpty = false;
+        break;
+      }
+    }
+    if (isEmpty === true) {
+      sheet.deleteRow((parseInt(i)+1) - rowsDeleted);
+      rowsDeleted++;
+    }
+  }
+};
